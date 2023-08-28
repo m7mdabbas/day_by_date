@@ -1,0 +1,57 @@
+from tkinter import *
+from tkinter import messagebox as mb
+
+date=1
+def equal():
+    
+    date = yin.get()
+    date_list = list(date.split("/"))
+    day = int(date_list[0])
+    month = int(date_list[1])
+    year = int(date_list[2])
+
+    y = year - (14 - month) // 12
+    x = y + y//4 - y//100 + y//400
+    m = month + 12 * ((14 - month) // 12) - 2
+    d = (day + x + (31*m)//12) % 7
+
+    g=0
+    if d == 0:
+        g=("Sunday")
+    elif d == 1:
+        g=("Monday")
+    elif d == 2:
+        g=("Tuesday")
+    elif d == 3:
+        g=("Wednesday")
+    elif d == 4:
+        g=("Thursday")
+    elif d == 5:
+        g=("Friday")
+    elif d == 6:
+        g=("Saturday")
+    mb.showinfo('the day',g)
+
+x = Tk(	)
+
+x.title('the day of date')
+
+x.geometry('400x200+482+220')
+
+x.configure(bg='gray',cursor='boat')
+
+text = Label(x, text = 'write a date', font = ('Papyrus', 22),bg='gray')
+
+text.pack()
+
+y = StringVar()
+
+yin = Entry(x, text = 'date',width=9 ,font = ('Bauhaus 93', 40 ), textvariable=date, bg='black', fg='white',cursor='pirate',insertbackground="red")
+
+yin.pack()
+
+calc=Button(x, text = 'calc',width=5,height=-2,font=('sans',20),command=equal,bg='blue',cursor='hand2')
+
+calc.pack()
+
+x.mainloop()
